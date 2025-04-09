@@ -1,1 +1,1 @@
-export const Backend_url="";
+export const Backend_url="http://10.5.121.76:3003/api/v1";
