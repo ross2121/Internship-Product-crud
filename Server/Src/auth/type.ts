@@ -5,7 +5,7 @@ export const Product = z.object({
   description:z.string().min(1,"description is required"),
   category:z.string().min(1,"Category is required"),
   Price:z.number(),
-  rating:z.string().min(1,"Rating is required"),
+  rating:z.number(),
 });
 export const UserSchema = z.object({
     // username: z.string().min(3, "Username must be at least 3 characters long"),
