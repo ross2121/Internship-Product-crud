@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const router=Router();
 router.post("/create/product", async (req:any, res:any) => {
     const { name, description, category, Price, rating,userid } = req.body;
-    if (!name || !description || !category || !Price || !rating) {
+    if (!name || !description || !category||!userid ) {
         return res.status(400).json({ message: "All fields are required" });
     }
     const user=await prisma.user.findUnique({
@@ -37,14 +37,7 @@ router.post("/create/product", async (req:any, res:any) => {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 })
-router.get("/all/product" , async (req:any, res:any) => {
-    try {
-        const products = await prisma.product.findMany();
-        res.status(200).json(products);
-    } catch (error:any) {
-        res.status(500).json({ message: "Server error", error: error.message });
-    }
-})
+
 router.get("/product/:id", async (req:any, res:any) => {
     const { id } = req.params; 
     try {
@@ -62,6 +55,18 @@ router.get("/product/:id", async (req:any, res:any) => {
     } catch (error:any) {
         res.status(500).json({ message: "Server error", error: error.message });
     }
+})
+router.get("/product/admin/:id",async(req:any,res:any)=>{
+    const {id}=req.params;
+    if(!id){
+        return res.status(440).json({message:"No id fount"})
+    }
+    const product=await prisma.product.findUnique({
+        where:{
+            id:id
+        }
+    })
+    return res.status(200).json({product});
 })
 router.put("/update/:id", async (req:any, res:any) => {
     const { id } = req.params;

@@ -122,4 +122,13 @@ router.post("/admin/signin", (req, res) => __awaiter(void 0, void 0, void 0, fun
     const token = jsonwebtoken_1.default.sign({ id: user.id, role: "admin" }, "JWTOKEN");
     return res.status(200).json({ token, user });
 }));
+router.get("/all/product", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const products = yield prisma.product.findMany();
+        res.status(200).json(products);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}));
 exports.userrouter = router;

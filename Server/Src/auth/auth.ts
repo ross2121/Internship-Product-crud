@@ -108,5 +108,13 @@ router.post("/register/admin",async(req,res:any)=>{
         const token=jwt.sign({id:user.id,role:"admin"},"JWTOKEN");
         return res.status(200).json({token,user});
     })
+    router.get("/all/product" , async (req:any, res:any) => {
+        try {
+            const products = await prisma.product.findMany();
+            res.status(200).json(products);
+        } catch (error:any) {
+            res.status(500).json({ message: "Server error", error: error.message });
+        }
+    })
 
 export const userrouter=router;

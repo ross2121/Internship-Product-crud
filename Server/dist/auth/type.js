@@ -7,7 +7,7 @@ exports.Product = zod_1.z.object({
     description: zod_1.z.string().min(1, "description is required"),
     category: zod_1.z.string().min(1, "Category is required"),
     Price: zod_1.z.number(),
-    rating: zod_1.z.string().min(1, "Rating is required"),
+    rating: zod_1.z.number(),
 });
 exports.UserSchema = zod_1.z.object({
     // username: z.string().min(3, "Username must be at least 3 characters long"),
